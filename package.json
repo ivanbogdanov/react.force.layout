@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ForceDotComLabs/react.force.layout.git"
+    "url": "https://github.com/ivanbogdanov/react.force.layout.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ForceDotComLabs/react.force.layout/issues"
+    "url": "https://github.com/ivanbogdanov/react.force.layout/issues"
   },
-  "homepage": "https://github.com/ForceDotComLabs/react.force.layout#readme",
+  "homepage": "https://github.com/ivanbogdanov/react.force.layout#readme",
   "peerDependencies": {
     "react-native": ">=0.20.0",
-    "react.force.datacontainer": "https://github.com/ForceDotComLabs/react.force.datacontainer.git"
+    "react.force.datacontainer": "https://github.com/ivanbogdanov/react.force.datacontainer.git"
   }
 }
