@@ -57,8 +57,8 @@ module.exports = React.createClass ({
     };
   },
   getComponents(){
-    return this.props.layoutItem.components.map((component)=>{
-      return <Component sobj={this.props.sobj} layoutItem={component} />;
+    return this.props.layoutItem.components.map((component, index)=>{
+      return <Component key={'component_'+index} sobj={this.props.sobj} layoutItem={component} />;
     });
   },
   getValue() {
