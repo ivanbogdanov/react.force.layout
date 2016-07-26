@@ -32,12 +32,15 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import Empty from '../Empty';
+
 import SLDS from 'react.force.base.theme';
 
 
 module.exports = React.createClass ({
   contextTypes: {
     sobj: React.PropTypes.object,
+    sobjExt: React.PropTypes.object,
     compactLayout: React.PropTypes.object,
     defaultLayout: React.PropTypes.object
   },
@@ -60,16 +63,18 @@ module.exports = React.createClass ({
     }
   },
   render() {
+    if(!this.context.sobj || !this.context.sobj.Id){
+      return <Empty />;
+    }
     return (
       <TouchableOpacity 
         onPress={this.handlePress}>
-        <View>
           <SLDS.InputReadonly.ValueText 
             style={{
               paddingLeft:22,
               color:'#0070d2'
             }}>
-            {this.context.sobj.attributes.compactTitle?this.context.sobj.attributes.compactTitle:' '}
+            {this.context.sobjExt.compactTitle}
           </SLDS.InputReadonly.ValueText>
           <View 
             style={{
@@ -86,7 +91,6 @@ module.exports = React.createClass ({
                 height:16
               }} />
           </View>
-        </View>
       </TouchableOpacity>
     );
   }
