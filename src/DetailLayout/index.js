@@ -39,15 +39,20 @@ module.exports = React.createClass ({
   getDefaultProps(){
     return {
       sobj:{attributes:{}},
-      defaultLayout:{}
+      onSobjRequest:null
     };
   },
+  contextTypes: {
+    sobj: React.PropTypes.object,
+    compactLayout: React.PropTypes.object,
+    defaultLayout: React.PropTypes.object
+  },
   getLayoutSections(){
-    if(this.props.defaultLayout && this.props.defaultLayout.detailLayoutSections && this.props.defaultLayout.detailLayoutSections.length){
-      return this.props.defaultLayout.detailLayoutSections.map((layoutSection)=>{
+    if(this.context.defaultLayout && this.context.defaultLayout.detailLayoutSections && this.context.defaultLayout.detailLayoutSections.length){
+      return this.context.defaultLayout.detailLayoutSections.map((layoutSection)=>{
         return (
           <LayoutSection 
-          sobj={this.props.sobj} 
+          sobj={this.context.sobj} 
           layoutItem={layoutSection} 
           onLayoutTap={this.props.onLayoutTap}
           />
@@ -56,6 +61,7 @@ module.exports = React.createClass ({
     }
   },
   render() {
+    console.log('=== R=E=N=D=E=R! ===');
     return (
       <View>
         {this.getLayoutSections()}

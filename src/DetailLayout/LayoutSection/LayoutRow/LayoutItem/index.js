@@ -46,7 +46,7 @@ module.exports = React.createClass ({
             sobj={this.props.sobj} 
             layoutItem={layoutComponent} 
             onLayoutTap={this.props.onLayoutTap}
-            onSobjRequest={this.props.onSobjRequest}/>
+          />
         );
       });
     }

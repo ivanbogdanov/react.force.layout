@@ -38,7 +38,11 @@ module.exports = React.createClass ({
   getBody() {
     if(this.props.layoutItem && this.props.layoutItem.layoutItems  && this.props.layoutItem.layoutItems.length){
       return this.props.layoutItem.layoutItems.map((layoutItem)=>{
-        return <LayoutItem sobj={this.props.sobj} layoutItem={layoutItem} />;
+        return <LayoutItem 
+          sobj={this.props.sobj} 
+          layoutItem={layoutItem} 
+          onLayoutTap={this.props.onLayoutTap}
+        />;
       });
     }
   },

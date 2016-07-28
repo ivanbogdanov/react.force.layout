@@ -68,6 +68,7 @@ module.exports = React.createClass ({
     if(!referenceType || !referenceType){
       return <Empty />
     }
+    console.log('!!! REFERENCE: '+referenceType+' : '+referenceId);
     return (
       <SobjContainer
         type={referenceType}
