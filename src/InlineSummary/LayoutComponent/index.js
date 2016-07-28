@@ -24,10 +24,60 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- 
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text
+} from 'react-native';
+
+import SLDS from 'react.force.base.theme';
+
+import Component from './Component';
+
+import Reference from './Reference';
+
+
+
+module.exports = React.createClass ({
+  getDefaultProps(){
+    return {
+      sobj:{},
+      layoutItem:{}
+    };
+  },
+  getComponents(){
+    return this.props.layoutItem.components.map((component, index)=>{
+      return <Component key={'component_'+index} sobj={this.props.sobj} layoutItem={component} />;
+    });
+  },
+  getValue() {
+    const val = this.props.sobj[this.props.layoutItem.value];
+    if(val){
+      return val;
+    }
+    return '-';
+  },
+  getBody() {
+
+    if(this.props.layoutItem && this.props.layoutItem.components){
+      return this.getComponents();
+    }
+    if(this.props.layoutItem && this.props.layoutItem.details && this.props.layoutItem.details.type === 'reference'){
+      return (
+        <Reference 
+          sobj={this.props.sobj} 
+          layoutItem={this.props.layoutItem} 
+          onLayoutTap={this.props.onLayoutTap}
+        />
+      );
+    }
+    return <Text>{this.getValue()}</Text>;
+  },
+  render() {
+    return (
+      <Text>
+        {this.getBody()}
+      </Text>
+    )
+  }
+});

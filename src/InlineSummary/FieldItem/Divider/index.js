@@ -25,9 +25,17 @@
  */
  
  
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text,
+} from 'react-native';
+
+
+module.exports = React.createClass ({
+
+  render() {
+    return <Text> ● </Text>;
+  }
+
+});

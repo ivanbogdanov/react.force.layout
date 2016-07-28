@@ -24,10 +24,28 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- 
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text,
+  View
+} from 'react-native';
+
+import SLDS from 'react.force.base.theme';
+
+
+module.exports = React.createClass ({
+  getDefaultProps(){
+    return {
+      sobj:{},
+      layoutItem:{}
+    };
+  },
+  render() {
+    const val = this.props.sobj[this.props.layoutItem.value];
+    if(val){
+      return <SLDS.InputReadonly.ValueText>{val}</SLDS.InputReadonly.ValueText>;
+    }
+    return null;
+  }
+});

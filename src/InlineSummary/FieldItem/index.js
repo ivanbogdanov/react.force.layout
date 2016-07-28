@@ -24,10 +24,58 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- 
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text,
+} from 'react-native';
+
+import SLDS from 'react.force.base.theme';
+
+import Divider from './Divider';
+
+import LayoutComponent from '../LayoutComponent';
+
+module.exports = React.createClass ({
+  getDefaultProps(){
+    return {
+      sobj:{},
+      hasDivider:false,
+      layoutItem:{},
+      hideFields:[]
+    };
+  },
+  getLayoutComponents(){
+    const comps = [];
+    if(this.props.layoutItem.layoutComponents){
+      this.props.layoutItem.layoutComponents.map((layoutComponent,index)=>{
+        if(layoutComponent && layoutComponent.value && this.props.hideFields.indexOf(layoutComponent.value)<0){
+
+          comps.push (
+            <LayoutComponent 
+              key={'layoutComponent_'+index}
+              sobj={this.props.sobj} 
+              layoutItem={layoutComponent} 
+              onLayoutTap={this.props.onLayoutTap}
+              onSobjRequest={this.props.onSobjRequest}/>
+          );          
+
+//          comps.push(<Text>{index}</Text>);
+        }
+      });
+    }
+    return comps;
+  },
+  render() {
+    const comps = this.getLayoutComponents();
+    if(!comps.length){
+      return;
+    }
+    return (
+      <Text>
+        {this.props.hasDivider?<Divider />:''}
+        { comps }
+      </Text>
+    )
+  }
+});

@@ -25,9 +25,52 @@
  */
  
  
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text,
+  View
+} from 'react-native';
+
+import SLDS from 'react.force.base.theme';
+
+import FieldItem from './FieldItem';
+
+module.exports = React.createClass ({
+  contextTypes: {
+    sobj: React.PropTypes.object,
+    compactLayout: React.PropTypes.object,
+    defaultLayout: React.PropTypes.object
+  },
+  getDefaultProps(){
+    return {
+      hideFields:[],
+      onSobjRequest:null,
+    };
+  },
+  getFieldItems(){
+    if(this.context.compactLayout && this.context.compactLayout.fieldItems && this.context.compactLayout.fieldItems.length){
+      return this.context.compactLayout.fieldItems.map((layoutItem,index)=>{
+        if(index && index<6){
+          return (
+            <FieldItem
+            key={'fieldItem_'+index} 
+            sobj={this.context.sobj} 
+            layoutItem={layoutItem} 
+            onLayoutTap={this.props.onLayoutTap}
+            onSobjRequest={this.props.onSobjRequest} 
+            hasDivider={index>1}
+            hideFields={this.props.hideFields} />
+          );
+        }
+      });
+    }
+  },
+  render() {
+    return (
+      <Text>
+        {this.getFieldItems()}
+      </Text>
+    )
+  }
+});

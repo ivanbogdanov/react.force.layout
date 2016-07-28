@@ -24,10 +24,25 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- 
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text,
+} from 'react-native';
+
+import SLDS from 'react.force.base.theme';
+
+
+module.exports = React.createClass ({
+  contextTypes: {
+    sobj: React.PropTypes.object,
+    sobjExt: React.PropTypes.object,
+  },
+  render() {
+    return (
+      <Text >
+        {this.context.sobjExt && this.context.sobjExt.compactTitle?this.context.sobjExt.compactTitle:''}
+      </Text>
+    );
+  }
+});

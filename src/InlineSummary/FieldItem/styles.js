@@ -24,10 +24,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- 
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React from 'react-native';
+
+
+module.exports = React.StyleSheet.create({
+  container: {
+    margin:10
+  }
+});

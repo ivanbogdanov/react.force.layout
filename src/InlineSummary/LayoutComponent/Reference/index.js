@@ -24,10 +24,50 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- 
-module.exports = {
-  CompactLayout:require('./CompactLayout'),
-  DetailLayout:require('./DetailLayout'),
-  LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
-};
+'use strict';
+
+import React, {
+  Text,
+  View,
+  TouchableHighlight
+} from 'react-native';
+
+import SLDS from 'react.force.base.theme';
+
+//import styles from './styles';
+
+import Link from './Link';
+
+//import Empty from './Empty';
+
+
+import {SobjContainer} from 'react.force.datacontainer';
+
+
+module.exports = React.createClass ({
+  getDefaultProps(){
+    return {
+      sobj:{attributes:{}},
+      layoutItem:{}
+    };
+  },
+  render() {
+    const referenceId = this.props.sobj[this.props.layoutItem.details.name];
+    const referenceType = this.props.layoutItem.details.referenceTo[this.props.layoutItem.details.referenceTo.length-1];
+
+    if(!referenceType || !referenceType){
+      return <Text />
+    }
+    return (
+      <SobjContainer
+        type={referenceType}
+        id={referenceId}
+        wrapper={Text}
+      >
+        <Link 
+          layoutItem={this.props.layoutItem}
+        />
+      </SobjContainer>
+    );
+  }
+});
