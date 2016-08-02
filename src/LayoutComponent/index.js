@@ -27,7 +27,8 @@
 'use strict';
 
 import React, {
-  View
+  View,
+  Text
 } from 'react-native';
 
 import SLDS from 'react.force.base.theme';
@@ -71,7 +72,7 @@ module.exports = React.createClass ({
   getBody() {
 
     if(this.props.layoutItem && this.props.layoutItem.components){
-      return this.getComponents();
+      return <SLDS.InputReadonly.ValueText>{this.getComponents()}</SLDS.InputReadonly.ValueText>;
     }
     if(this.props.layoutItem && this.props.layoutItem.details && this.props.layoutItem.details.calculatedFormula && this.props.layoutItem.details.calculatedFormula.indexOf('IMAGE') === 0){
       return <LayoutImage 

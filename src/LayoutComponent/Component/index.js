@@ -33,8 +33,6 @@ import React, {
 
 import SLDS from 'react.force.base.theme';
 
-import styles from './styles';
-
 module.exports = React.createClass ({
   getDefaultProps(){
     return {
@@ -44,9 +42,6 @@ module.exports = React.createClass ({
   },
   render() {
     const val = this.props.sobj[this.props.layoutItem.value];
-    if(val){
-      return <SLDS.InputReadonly.ValueText>{val}</SLDS.InputReadonly.ValueText>;
-    }
-    return null;
+    return <Text>{val?val:' '} </Text>;
   }
 });

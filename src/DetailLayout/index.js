@@ -49,9 +49,10 @@ module.exports = React.createClass ({
   },
   getLayoutSections(){
     if(this.context.defaultLayout && this.context.defaultLayout.detailLayoutSections && this.context.defaultLayout.detailLayoutSections.length){
-      return this.context.defaultLayout.detailLayoutSections.map((layoutSection)=>{
+      return this.context.defaultLayout.detailLayoutSections.map((layoutSection, index)=>{
         return (
           <LayoutSection 
+          key={'layoutSection_'+index}
           sobj={this.context.sobj} 
           layoutItem={layoutSection} 
           onLayoutTap={this.props.onLayoutTap}
@@ -61,7 +62,6 @@ module.exports = React.createClass ({
     }
   },
   render() {
-    console.log('=== R=E=N=D=E=R! ===');
     return (
       <View>
         {this.getLayoutSections()}

@@ -60,7 +60,7 @@ module.exports = React.createClass ({
     const value = this.props.sobj[this.props.layoutItem.details.name];
     return (
       <SLDS.InputReadonly.ValueText>
-        {value}
+        {value?value:' '}
       </SLDS.InputReadonly.ValueText>
     );
   }

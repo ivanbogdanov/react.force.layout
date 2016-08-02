@@ -29,6 +29,7 @@
 import React, {
   Text,
   View,
+  Image,
   TouchableOpacity
 } from 'react-native';
 
@@ -42,7 +43,9 @@ module.exports = React.createClass ({
     sobj: React.PropTypes.object,
     sobjExt: React.PropTypes.object,
     compactLayout: React.PropTypes.object,
-    defaultLayout: React.PropTypes.object
+    defaultLayout: React.PropTypes.object,
+    describe: React.PropTypes.object,
+    theme: React.PropTypes.object
   },
   getDefaultProps(){
     return {
@@ -56,12 +59,54 @@ module.exports = React.createClass ({
           refSobj:this.context.sobj,
           layoutItem:this.props.layoutItem,
           sobj:this.props.parentSobj,
+          pageLabel: this.context.describe.label,
           eventType:this.props.layoutItem.details.type,
           value:this.props.sobj[this.props.layoutItem.details.name]
         }
       );
     }
   },
+
+  getIcon () {
+    console.log('==g=e=t=I=m=g==');
+    if(this.context.theme && this.context.theme.icons && this.context.theme.icons.length){
+      console.log('>>> icons: ',this.context.theme.icons);
+      const url = this.context.theme.icons[this.context.theme.icons.length-2].url;
+      const color = '#'+this.context.theme.colors[0].color;
+      if(url && color){
+      return (
+        <View style={{
+          position:'absolute',
+          top:2,
+          left:0,
+          width:20,
+          height:20,
+          backgroundColor:color,
+          borderRadius:2
+        }}><Image source={{uri:url}} style={{width:20,height:20}}/></View>
+        );
+      }
+    }
+    return (
+      <View 
+        style={{
+          position:'absolute',
+          top:12,
+          left:0,
+          height:20,
+          width:20,
+        }}>
+        <SLDS.Icons.Utility 
+          name='link' 
+          style={{
+            width:16,
+            height:16
+          }} />
+        }
+      </View>
+    );
+  },
+
   render() {
     if(!this.context.sobj || !this.context.sobj.Id){
       return <Empty />;
@@ -71,7 +116,7 @@ module.exports = React.createClass ({
         onPress={this.handlePress}>
           <SLDS.InputReadonly.ValueText 
             style={{
-              paddingLeft:22,
+              paddingLeft:28,
               color:'#0070d2'
             }}>
             {this.context.sobjExt.compactTitle}
@@ -84,12 +129,7 @@ module.exports = React.createClass ({
               height:20,
               width:20,
             }}>
-            <SLDS.Icons.Utility 
-              name='link' 
-              style={{
-                width:16,
-                height:16
-              }} />
+            { this.getIcon() }
           </View>
       </TouchableOpacity>
     );

@@ -51,7 +51,7 @@ module.exports = React.createClass ({
   getFieldItems(){
     if(this.context.compactLayout && this.context.compactLayout.fieldItems && this.context.compactLayout.fieldItems.length){
       return this.context.compactLayout.fieldItems.map((layoutItem,index)=>{
-        if(index && index<6){
+        if(index && index<5){
           return (
             <FieldItem
             key={'fieldItem_'+index} 

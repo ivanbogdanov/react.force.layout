@@ -68,7 +68,7 @@ module.exports = React.createClass ({
                 paddingLeft:22,
                 color:'#0070d2'
               }}>
-              {value}
+              {value?value:' '}
             </SLDS.InputReadonly.ValueText>
             <View 
               style={{

@@ -29,8 +29,10 @@
 import React, {
   Text,
   Image,
-  View
+  View,
+  ScrollView
 } from 'react-native';
+
 
 module.exports = React.createClass ({
   render() {
@@ -56,9 +58,11 @@ module.exports = React.createClass ({
     });
 
     return (
-      <View>
-        <Image source={{uri:url}} style={{width:width,height:height}}/>
-      </View>
+      <ScrollView style={{
+        marginTop:15,
+      }} horizontal={true}>
+          <Image source={{uri:url}} style={{width:width,height:height}}/>
+      </ScrollView>
     );
   }
 });
