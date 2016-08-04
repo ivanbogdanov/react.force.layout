@@ -29,5 +29,6 @@ module.exports = {
   CompactLayout:require('./CompactLayout'),
   DetailLayout:require('./DetailLayout'),
   LayoutComponent:require('./LayoutComponent'),
-  InlineSummary:require('./InlineSummary')
+  InlineSummary:require('./InlineSummary'),
+  RelatedLists:require('./RelatedLists')
 };
