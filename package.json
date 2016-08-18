@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ivanbogdanov/react.force.layout#readme",
   "peerDependencies": {
     "react-native": ">=0.20.0",
+    "react.force.base.theme": "https://github.com/ivanbogdanov/react.force.base.theme.git",
     "react.force.datacontainer": "https://github.com/ivanbogdanov/react.force.datacontainer.git"
   }
 }
