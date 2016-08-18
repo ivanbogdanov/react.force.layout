@@ -43,6 +43,10 @@ import Email from './Email';
 
 import Currency from './Currency';
 
+import Url from './Url';
+
+import Address from './Address';
+
 
 import LayoutImage from './LayoutImage';
 
@@ -71,9 +75,20 @@ module.exports = React.createClass ({
   },
   getBody() {
 
+    if(this.props.layoutItem && this.props.layoutItem.details && this.props.layoutItem.details.type === 'address'){
+      if(this.props.layoutItem && this.props.layoutItem.components){
+        return <Address 
+          sobj={this.props.sobj} 
+          layoutItem={this.props.layoutItem} 
+          onLayoutTap={this.props.onLayoutTap}
+        />
+      }
+    }
+
     if(this.props.layoutItem && this.props.layoutItem.components){
       return <SLDS.InputReadonly.ValueText>{this.getComponents()}</SLDS.InputReadonly.ValueText>;
     }
+
     if(this.props.layoutItem && this.props.layoutItem.details && this.props.layoutItem.details.calculatedFormula && this.props.layoutItem.details.calculatedFormula.indexOf('IMAGE') === 0){
       return <LayoutImage 
           sobj={this.props.sobj} 
@@ -102,6 +117,15 @@ module.exports = React.createClass ({
     if(this.props.layoutItem && this.props.layoutItem.details && this.props.layoutItem.details.type === 'email'){
       return (
         <Email 
+          sobj={this.props.sobj} 
+          layoutItem={this.props.layoutItem} 
+          onLayoutTap={this.props.onLayoutTap}
+        />
+      );
+    }
+    if(this.props.layoutItem && this.props.layoutItem.details && this.props.layoutItem.details.type === 'url'){
+      return (
+        <Url 
           sobj={this.props.sobj} 
           layoutItem={this.props.layoutItem} 
           onLayoutTap={this.props.onLayoutTap}

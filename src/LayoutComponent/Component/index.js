@@ -31,8 +31,6 @@ import React, {
   View
 } from 'react-native';
 
-import SLDS from 'react.force.base.theme';
-
 module.exports = React.createClass ({
   getDefaultProps(){
     return {

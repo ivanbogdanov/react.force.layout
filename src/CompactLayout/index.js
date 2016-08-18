@@ -67,7 +67,7 @@ module.exports = React.createClass ({
   },
   render() {
     return (
-      <View>
+      <View style={this.props.style}>
         {this.getFieldItems()}
       </View>
     )

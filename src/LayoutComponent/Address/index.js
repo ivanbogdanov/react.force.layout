@@ -28,44 +28,93 @@
 
 import React, {
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import SLDS from 'react.force.base.theme';
 
-import LayoutSection from './LayoutSection';
+import Component from '../Component';
+
+import styles from './styles';
+
 
 module.exports = React.createClass ({
   getDefaultProps(){
     return {
       sobj:{attributes:{}},
-      onSobjRequest:null
+      layoutItem:{}
     };
   },
-  contextTypes: {
-    sobj: React.PropTypes.object,
-    compactLayout: React.PropTypes.object,
-    defaultLayout: React.PropTypes.object
-  },
-  getLayoutSections(){
-    if(this.context.defaultLayout && this.context.defaultLayout.detailLayoutSections && this.context.defaultLayout.detailLayoutSections.length){
-      return this.context.defaultLayout.detailLayoutSections.map((layoutSection, index)=>{
-        return (
-          <LayoutSection 
-          key={'layoutSection_'+index}
-          sobj={this.context.sobj} 
-          layoutItem={layoutSection} 
-          onLayoutTap={this.props.onLayoutTap}
-          />
-        );
-      });
+  handlePress(){
+    if(this.props.onLayoutTap){
+      this.props.onLayoutTap(
+        {
+          layoutItem:this.props.layoutItem,
+          sobj:this.props.sobj,
+          eventType:this.props.layoutItem.details.type,
+          value:this.props.sobj[this.props.layoutItem.details.name]
+        }
+      );
     }
   },
+
+  getComponents(){
+    return this.props.layoutItem.components.map((component, index)=>{
+      return <Component key={'component_'+index} sobj={this.props.sobj} layoutItem={component} />;
+    });
+  },
+
+  getValue() {
+    const val = this.props.sobj[this.props.layoutItem.value];
+    if(val){
+      return val;
+    }
+    return '-';
+  },
+
+  getBody() {
+
+    if(this.props.layoutItem && this.props.layoutItem.components){
+      return <Text>{this.getComponents()}</Text>;
+    }
+
+    return <Text>{this.getValue()}</Text>;
+  },
+
   render() {
     return (
-      <View style={this.props.style}>
-        {this.getLayoutSections()}
-      </View>
-    )
+      <TouchableOpacity 
+        onPress={this.handlePress}>
+        <View>
+            <SLDS.InputReadonly.ValueText 
+              style={{
+                marginTop:12,
+                paddingLeft:22,
+                color:'#0070d2',
+                lineHeight:24,
+              }}
+            >
+              {this.getBody()}
+            </SLDS.InputReadonly.ValueText>
+            <View 
+              style={{
+                position:'absolute',
+                top:16,
+                left:0,
+                height:20,
+                width:20,
+              }}>
+              <SLDS.Icons.Utility 
+                name='location' 
+                style={{
+                  width:16,
+                  height:16
+                }} />
+            </View>
+
+        </View>
+      </TouchableOpacity>
+    );
   }
 });

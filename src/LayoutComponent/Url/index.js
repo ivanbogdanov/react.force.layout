@@ -28,44 +28,66 @@
 
 import React, {
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import SLDS from 'react.force.base.theme';
 
-import LayoutSection from './LayoutSection';
+import styles from './styles';
+
 
 module.exports = React.createClass ({
   getDefaultProps(){
     return {
       sobj:{attributes:{}},
-      onSobjRequest:null
+      layoutItem:{}
     };
   },
-  contextTypes: {
-    sobj: React.PropTypes.object,
-    compactLayout: React.PropTypes.object,
-    defaultLayout: React.PropTypes.object
-  },
-  getLayoutSections(){
-    if(this.context.defaultLayout && this.context.defaultLayout.detailLayoutSections && this.context.defaultLayout.detailLayoutSections.length){
-      return this.context.defaultLayout.detailLayoutSections.map((layoutSection, index)=>{
-        return (
-          <LayoutSection 
-          key={'layoutSection_'+index}
-          sobj={this.context.sobj} 
-          layoutItem={layoutSection} 
-          onLayoutTap={this.props.onLayoutTap}
-          />
-        );
-      });
+  handlePress(){
+    if(this.props.onLayoutTap){
+      this.props.onLayoutTap(
+        {
+          layoutItem:this.props.layoutItem,
+          sobj:this.props.sobj,
+          eventType:this.props.layoutItem.details.type,
+          value:this.props.sobj[this.props.layoutItem.details.name]
+        }
+      );
     }
   },
   render() {
+    const value = this.props.sobj[this.props.layoutItem.details.name];
+//    const referenceType = this.props.layoutItem.details.referenceTo[this.props.layoutItem.details.referenceTo.length-1];
     return (
-      <View style={this.props.style}>
-        {this.getLayoutSections()}
-      </View>
-    )
+      <TouchableOpacity 
+        onPress={this.handlePress}>
+        <View>
+            <SLDS.InputReadonly.ValueText 
+              style={{
+                paddingLeft:22,
+                color:'#0070d2'
+              }}>
+              {value?value:' '}
+            </SLDS.InputReadonly.ValueText>
+            <View 
+              style={{
+                position:'absolute',
+                top:18,
+                left:0,
+                height:20,
+                width:20,
+              }}>
+              <SLDS.Icons.Utility 
+                name='link' 
+                style={{
+                  width:16,
+                  height:16
+                }} />
+            </View>
+
+        </View>
+      </TouchableOpacity>
+    );
   }
 });

@@ -26,46 +26,11 @@
  
 'use strict';
 
-import React, {
-  Text,
-  View
-} from 'react-native';
+import React from 'react-native';
 
-import SLDS from 'react.force.base.theme';
 
-import LayoutSection from './LayoutSection';
-
-module.exports = React.createClass ({
-  getDefaultProps(){
-    return {
-      sobj:{attributes:{}},
-      onSobjRequest:null
-    };
-  },
-  contextTypes: {
-    sobj: React.PropTypes.object,
-    compactLayout: React.PropTypes.object,
-    defaultLayout: React.PropTypes.object
-  },
-  getLayoutSections(){
-    if(this.context.defaultLayout && this.context.defaultLayout.detailLayoutSections && this.context.defaultLayout.detailLayoutSections.length){
-      return this.context.defaultLayout.detailLayoutSections.map((layoutSection, index)=>{
-        return (
-          <LayoutSection 
-          key={'layoutSection_'+index}
-          sobj={this.context.sobj} 
-          layoutItem={layoutSection} 
-          onLayoutTap={this.props.onLayoutTap}
-          />
-        );
-      });
-    }
-  },
-  render() {
-    return (
-      <View style={this.props.style}>
-        {this.getLayoutSections()}
-      </View>
-    )
+module.exports = React.StyleSheet.create({
+  value: {
+    paddingTop: 5,
   }
 });

@@ -32,7 +32,7 @@ import React, {
   TouchableHighlight
 } from 'react-native';
 
-import SLDS from 'react.force.base.theme';
+import Theme from 'react.force.base.theme';
 
 import styles from './styles';
 
@@ -65,10 +65,12 @@ module.exports = React.createClass ({
     const referenceId = this.props.sobj[this.props.layoutItem.details.name];
     const referenceType = this.props.layoutItem.details.referenceTo[this.props.layoutItem.details.referenceTo.length-1];
 
+    console.log('::: referenceType: '+referenceType);
+    console.log('::: referenceId: '+referenceId);
+
     if(!referenceType || !referenceType){
       return <Empty />
     }
-    console.log('!!! REFERENCE: '+referenceType+' : '+referenceId);
     return (
       <SobjContainer
         type={referenceType}

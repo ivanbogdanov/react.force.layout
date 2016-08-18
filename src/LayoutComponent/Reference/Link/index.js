@@ -68,9 +68,7 @@ module.exports = React.createClass ({
   },
 
   getIcon () {
-    console.log('==g=e=t=I=m=g==');
     if(this.context.theme && this.context.theme.icons && this.context.theme.icons.length){
-      console.log('>>> icons: ',this.context.theme.icons);
       const url = this.context.theme.icons[this.context.theme.icons.length-2].url;
       const color = '#'+this.context.theme.colors[0].color;
       if(url && color){
@@ -114,6 +112,7 @@ module.exports = React.createClass ({
     return (
       <TouchableOpacity 
         onPress={this.handlePress}>
+          <SLDS.FadeIn>
           <SLDS.InputReadonly.ValueText 
             style={{
               paddingLeft:28,
@@ -131,6 +130,7 @@ module.exports = React.createClass ({
             }}>
             { this.getIcon() }
           </View>
+          </SLDS.FadeIn>
       </TouchableOpacity>
     );
   }
